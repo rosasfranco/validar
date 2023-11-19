@@ -101,7 +101,7 @@
                   // Mostrar los datos del curso
                   mostrarDatosCurso(cursoEncontrado);
                   break;
-                }
+                }2
               }
             })
             .catch(function(error) {
@@ -116,21 +116,15 @@
       window.location.href = "login.html";
     }
 
-   function mostrarDatosCurso(curso) {
-  console.log(curso); // Verificar los datos en la consola
-  var cursoContainer = document.getElementById("curso-container");
-
-  if (curso && curso.presentacion) {
-    cursoContainer.innerHTML = `
-      <h2>${curso.nombrecurso}</h2>
-      <img src="${curso.imagen}" alt="${curso.nombrecurso}">
-      <p><strong>Presentación:</strong> ${curso.presentacion}</p>
-      <p><strong>Objetivo General:</strong> ${curso.objetivogeneral}</p>
-    `;
-  } else {
-    console.error("Los datos del curso o la presentación son undefined.");
-  }
-}
+    function mostrarDatosCurso(curso) {
+      var cursoContainer = document.getElementById("curso-container");
+      cursoContainer.innerHTML = `
+        <h2>${curso.nombrecurso}</h2>
+        <img src="${curso.imagen}" alt="${curso.nombrecurso}">
+        <p><strong>Presentación:</strong> ${curso.presentacion}</p>
+        <p><strong>Objetivo General:</strong> ${curso.objetivogeneral}</p>
+      `;
+    }
     function cerrarSesion() {
           // Elimina el valor de "registroId" del almacenamiento local
           localStorage.removeItem("registroId");
@@ -160,3 +154,4 @@
 
 </body>
 </html>
+
