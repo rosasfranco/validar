@@ -101,15 +101,6 @@
         li.innerHTML = `<strong>${key}:</strong> ${perfil[key]}`;
         ul.appendChild(li);
       }
-
-      // Agregar un enlace para volver a la página de inicio
-      var volverEnlace = document.createElement("a");
-      volverEnlace.href = "index.html";
-      volverEnlace.textContent = "Volver a la página de inicio";
-      var volverLi = document.createElement("li");
-      volverLi.appendChild(volverEnlace);
-      ul.appendChild(volverLi);
-
       perfilContainer.appendChild(ul);
     }
 
