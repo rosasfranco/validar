@@ -1,108 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Perfil</title>
   <style>
-    /* Estilos generales */
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa; /* Color de fondo general */
+      background-color: #f4f4f4;
       margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    form {
-      max-width: 400px;
-      width: 100%;
-      padding: 20px;
-      background-color: #ffffff; /* Color de fondo del formulario */
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra alrededor del formulario */
+      padding: 0;
+      text-align: center;
+      color: #333;
     }
 
     h1 {
-      text-align: center;
-      color: #007BFF; /* Color azul para el título */
+      color: #007BFF;
+      margin-top: 20px;
     }
 
-    label, input {
-      display: block;
-      width: 100%;
+    #perfilContainer {
+      width: 60%;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
       margin-bottom: 15px;
+      font-size: 16px;
     }
 
-    input[type="submit"] {
-      background-color: #007BFF; /* Color de fondo azul para el botón de submit */
-      color: #ffffff; /* Color del texto blanco para el botón de submit */
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    strong {
+      color: #007BFF;
     }
 
-    input[type="submit"]:hover {
-      background-color: #0056b3; /* Cambiar color de fondo al pasar el ratón sobre el botón */
+    /* Estilos para enlaces */
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <form id="loginForm">
-    <h1>Login</h1>
-    <label for="dni">DNIASS:</label>
-    <input type="text" id="dni" required>
-    <label for="contrasenia">Contraseña:</label>
-    <input type="password" id="contrasenia" required>
-    <input type="submit" value="Iniciar Sesión">
-  </form>
+
+  <h1>Perfil</h1>
+
+  <div id="perfilContainer"></div>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Evitar que se envíe el formulario automáticamente
+    // Obtener el ID del registro desde el almacenamiento local
+    var registroId = localStorage.getItem("registroId");
 
-      var dniInput = document.getElementById("dni").value;
-      var contraseniaInput = document.getElementById("contrasenia").value;
-      var url = "https://registro-25757-default-rtdb.firebaseio.com/registro.json";
-
-      // Realizar la petición GET a la API para obtener los registros
-      fetch(url)
+    if (registroId) {
+      // Obtener los datos del registro desde la API
+      var registroUrl = "https://registro-25757-default-rtdb.firebaseio.com/registro/" + registroId + ".json";
+      fetch(registroUrl)
         .then(function(response) {
           return response.json();
         })
         .then(function(data) {
-          var registroEncontrado = false;
-          var registroId;
+          // Crear un objeto de perfil sin la contraseña
+          var perfil = {
+            nombreyapellido: data.nombreyapellido,
+            dni: data.dni,
+            email: data.email,
+            curso: data.curso
+          };
 
-          // Buscar el registro que coincida con el DNI y la contraseña ingresados
-          for (var key in data) {
-            if (data.hasOwnProperty(key) && data[key].dni === dniInput && data[key].contrasenia === contraseniaInput) {
-              registroEncontrado = true;
-              registroId = key;
-              console.log(registroEncontrado);
-              break;
-            }
-          }
-
-          if (registroEncontrado) {
-            // Guardar el ID del registro en el almacenamiento local
-            localStorage.setItem("registroId", registroId);
-
-            // Redirigir a alumnoscookies.html
-            window.location.href = "alumnoscookies.html";
-          } else {
-            alert("Credenciales inválidas. Por favor, intenta nuevamente.");
-          }
+          // Mostrar los datos del perfil
+          mostrarDatosPerfil(perfil);
         })
         .catch(function(error) {
-          alert("Ha ocurrido un error. Por favor, intenta nuevamente.");
           console.error(error);
         });
-    });
+    } else {
+      // Si no se encuentra el ID del registro en el almacenamiento local, redirigir a login.html
+      window.location.href = "login.html";
+    }
+
+    function mostrarDatosPerfil(perfil) {
+      var perfilContainer = document.getElementById("perfilContainer");
+
+      var ul = document.createElement("ul");
+      for (var key in perfil) {
+        var li = document.createElement("li");
+        li.innerHTML = `<strong>${key}:</strong> ${perfil[key]}`;
+        ul.appendChild(li);
+      }
+
+      // Agregar un enlace para volver a la página de inicio
+      var volverEnlace = document.createElement("a");
+      volverEnlace.href = "index.html";
+      volverEnlace.textContent = "Volver a la página de inicio";
+      var volverLi = document.createElement("li");
+      volverLi.appendChild(volverEnlace);
+      ul.appendChild(volverLi);
+
+      perfilContainer.appendChild(ul);
+    }
+
   </script>
+
 </body>
 </html>
