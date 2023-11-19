@@ -1,22 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alumnos</title>
   <style>
-    /* Estilos básicos */
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
+
+    h1 {
+      color: #333;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #curso-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
     img {
-      max-width: 200px;
+      max-width: 100%;
       height: auto;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
+</head>
+<body>
+
   <h1 id="bienvenido"></h1>
-  <br>
   <button id="logoutButton" onclick="cerrarSesion()">Cerrar sesión</button>
+
+  <div id="curso-container"></div>
+
   <script>
     // Obtener el ID del registro desde el almacenamiento local
     var registroId = localStorage.getItem("registroId");
@@ -68,14 +117,13 @@
     }
 
     function mostrarDatosCurso(curso) {
-      var cursoContainer = document.createElement("div");
+      var cursoContainer = document.getElementById("curso-container");
       cursoContainer.innerHTML = `
         <h2>${curso.nombrecurso}</h2>
         <img src="${curso.imagen}" alt="${curso.nombrecurso}">
         <p><strong>Presentación:</strong> ${curso.presentacion}</p>
         <p><strong>Objetivo General:</strong> ${curso.objetivogeneral}</p>
       `;
-      document.body.appendChild(cursoContainer);
     }
     function cerrarSesion() {
           // Elimina el valor de "registroId" del almacenamiento local
@@ -86,7 +134,7 @@
       }
   </script>
   <!-- Botón para abrir el perfil en una ventana flotante -->
-   <button id="perfilButton">Ver perfil</button>
+  <button id="perfilButton">Ver perfil</button>
 
    <script>
      // Obtener el ID del registro desde la URL
