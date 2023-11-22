@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil</title>
+  <!-- Agregando Bootstrap CSS desde CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    /* Estilos básicos */
+    /* Estilos personalizados */
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #perfilContainer {
+      margin-top: 20px;
     }
   </style>
 </head>
-<body>
-  <h1>Perfil</h1>
 
-  <div id="perfilContainer"></div>
+<body class="container">
+  <!-- Contenido Bootstrap -->
+  <h1 class="mt-4">Perfil</h1>
 
-    <script>
+  <div id="perfilContainer" class="card p-4">
+    <!-- Contenido del perfil se insertará aquí dinámicamente -->
+  </div>
+
+  <script>
     // Obtener el ID del registro desde el almacenamiento local
     var registroId = localStorage.getItem("registroId");
 
@@ -56,9 +74,13 @@
       }
 
       perfilContainer.appendChild(ul);
-
     }
-
   </script>
+
+  <!-- Agregando Bootstrap JS y Popper.js desde CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
