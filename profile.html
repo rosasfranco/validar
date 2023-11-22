@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil</title>
   <style>
-    /* Estilos básicos */
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #perfilContainer {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li strong {
+      display: inline-block;
+      width: 100px; /* Ajusta según sea necesario */
     }
   </style>
 </head>
@@ -54,13 +87,15 @@
       var ul = document.createElement("ul");
       for (var key in perfil) {
         var li = document.createElement("li");
-        li.textContent = key + ": " + perfil[key];
+        var strong = document.createElement("strong");
+        strong.textContent = key + ":";
+        li.appendChild(strong);
+        li.innerHTML += " " + perfil[key];
         ul.appendChild(li);
       }
 
       perfilContainer.appendChild(ul);
     }
-
   </script>
 </body>
 
