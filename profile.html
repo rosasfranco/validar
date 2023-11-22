@@ -46,10 +46,10 @@
         .then(function(data) {
           // Crear un objeto de perfil sin la contraseña
           var perfil = {
-            nombre y apellido: data.nombreyapellido,
-            dni: data.dni,
-            email: data.mail,
-            curso: data.curso
+            "Nombre y Apellido": data.nombreyapellido,
+            "DNI": data.dni,
+            "Email": data.mail,
+            "Curso": data.curso
           };
 
           // Mostrar los datos del perfil
@@ -69,7 +69,7 @@
       var ul = document.createElement("ul");
       for (var key in perfil) {
         var li = document.createElement("li");
-        li.textContent = key + ": " + perfil[key];
+        li.innerHTML = "<strong>" + key + ":</strong> " + perfil[key];
         ul.appendChild(li);
       }
 
