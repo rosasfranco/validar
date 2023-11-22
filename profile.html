@@ -7,6 +7,7 @@
     body {
       font-family: Arial, sans-serif;
     }
+   
   </style>
 </head>
 <body>
@@ -28,11 +29,13 @@
         .then(function(data) {
           // Crear un objeto de perfil sin la contraseña
           var perfil = {
+
             nombreyapellido: data.nombreyapellido,
             dni: data.dni,
             email: data.mail,
             curso: data.curso
           };
+
 
           // Mostrar los datos del perfil
           mostrarDatosPerfil(perfil);
@@ -50,8 +53,11 @@
 
       var ul = document.createElement("ul");
       for (var key in perfil) {
+        var span = document.createElement("span");
+        span.textContent = + perfil[key];
         var li = document.createElement("li");
-        li.textContent = key + ": " + perfil[key];
+        li.textContent = key + ": ";
+        li.appendChild(span);
         ul.appendChild(li);
       }
 
