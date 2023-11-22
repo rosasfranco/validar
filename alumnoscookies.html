@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,8 +58,7 @@
     }
   </style>
 </head>
-<body>
-</head>
+
 <body>
 
   <h1 id="bienvenido"></h1>
@@ -74,10 +74,10 @@
       // Obtener los datos del registro desde la API
       var registroUrl = "https://registro-25757-default-rtdb.firebaseio.com/registro/" + registroId + ".json";
       fetch(registroUrl)
-        .then(function(response) {
+        .then(function (response) {
           return response.json();
         })
-        .then(function(data) {
+        .then(function (data) {
           // Obtener el nombre y apellido del registro
           var nombreApellido = data.nombreyapellido;
 
@@ -90,10 +90,10 @@
           // Obtener los datos del curso desde la API
           var cursosUrl = "https://cursos-c1e38-default-rtdb.firebaseio.com/cursos.json";
           fetch(cursosUrl)
-            .then(function(response) {
+            .then(function (response) {
               return response.json();
             })
-            .then(function(cursosData) {
+            .then(function (cursosData) {
               // Buscar el curso que coincida con el nombre del curso del registro
               for (var key in cursosData) {
                 if (cursosData.hasOwnProperty(key) && cursosData[key].nombrecurso === curso) {
@@ -101,14 +101,14 @@
                   // Mostrar los datos del curso
                   mostrarDatosCurso(cursoEncontrado);
                   break;
-                }2
+                }
               }
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.error(error);
             });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error(error);
         });
     } else {
@@ -125,32 +125,35 @@
         <p><strong>Objetivo General:</strong> ${curso.objetivogeneral}</p>
       `;
     }
-    function cerrarSesion() {
-          // Elimina el valor de "registroId" del almacenamiento local
-          localStorage.removeItem("registroId");
 
-          // Puedes redirigir al usuario a una página de inicio de sesión o realizar otras acciones de cierre de sesión si es necesario
-          window.location.href = "login.html";
-      }
+    function cerrarSesion() {
+      // Elimina el valor de "registroId" del almacenamiento local
+      localStorage.removeItem("registroId");
+
+      // Puedes redirigir al usuario a una página de inicio de sesión o realizar otras acciones de cierre de sesión si es necesario
+      window.location.href = "login.html";
+    }
   </script>
   <!-- Botón para abrir el perfil en una ventana flotante -->
   <button id="perfilButton">Ver perfil</button>
 
-   <script>
-     // Obtener el ID del registro desde la URL
-     var urlParams = new URLSearchParams(window.location.search);
-     var registroId = urlParams.get("id");
-
-     // Generar la URL de profile.html con el ID del registro
-     var profileUrl = "profile.html";
-
-     // Obtener el botón de perfil y agregar el evento click
-     var perfilButton = document.getElementById("perfilButton");
-     perfilButton.addEventListener("click", function() {
-       // Abrir "profile.html" en una ventana flotante
-       window.open(profileUrl, "Perfil", "width=600,height=400");
-     });
-   </script>
+  <script>
+    // Obtener el botón de perfil y agregar el evento click
+    var perfilButton = document.getElementById("perfilButton");
+    perfilButton.addEventListener("click", function () {
+      // Verificar que registroId tenga un valor antes de abrir la ventana emergente
+      if (registroId) {
+        // Generar la URL de profile.html con el ID del registro
+        var profileUrl = "profile.html?id=" + registroId;
+        // Abrir "profile.html" en una ventana flotante
+        window.open(profileUrl, "Perfil", "width=600,height=400");
+      } else {
+        console.error("ID de registro no válido");
+      }
+    });
+  </script>
 
 </body>
+
 </html>
+
