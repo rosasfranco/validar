@@ -62,9 +62,12 @@
 <body>
 
   <h1 id="bienvenido"></h1>
-  <button id="logoutButton" onclick="cerrarSesion()">Cerrar sesión</button>
 
   <div id="curso-container"></div>
+
+  <button id="perfilButton">Ver perfil</button>
+  <!-- Botón para cerrar sesión -->
+  <button id="logoutButton" onclick="cerrarSesion()">Cerrar sesión</button>
 
   <script>
     // Obtener el ID del registro desde el almacenamiento local
@@ -134,26 +137,7 @@
       window.location.href = "login.html";
     }
   </script>
-  <!-- Botón para abrir el perfil en una ventana flotante -->
-  <button id="perfilButton">Ver perfil</button>
-
-  <script>
-    // Obtener el botón de perfil y agregar el evento click
-    var perfilButton = document.getElementById("perfilButton");
-    perfilButton.addEventListener("click", function () {
-      // Verificar que registroId tenga un valor antes de abrir la ventana emergente
-      if (registroId) {
-        // Generar la URL de profile.html con el ID del registro
-        var profileUrl = "profile.html?id=" + registroId;
-        // Abrir "profile.html" en una ventana flotante
-        window.open(profileUrl, "Perfil", "width=600,height=400");
-      } else {
-        console.error("ID de registro no válido");
-      }
-    });
-  </script>
 
 </body>
 
 </html>
-
