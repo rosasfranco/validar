@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,21 +20,7 @@
     }
 
     /* Estilo para el botón Cerrar sesión */
-    #logoutButton {
-      background-color: blue;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    /* Estilo para el botón Ver perfil */
+    #logoutButton,
     #perfilButton {
       background-color: blue;
       color: white;
@@ -46,7 +33,7 @@
       margin: 4px 2px;
       cursor: pointer;
       border-radius: 4px;
-    }   
+    }
 
     #curso-container {
       display: flex;
@@ -73,8 +60,7 @@
     }
   </style>
 </head>
-<body>
-</head>
+
 <body>
 
   <h1 id="bienvenido"></h1>
@@ -117,7 +103,7 @@
                   // Mostrar los datos del curso
                   mostrarDatosCurso(cursoEncontrado);
                   break;
-                }2
+                }
               }
             })
             .catch(function(error) {
@@ -141,40 +127,42 @@
         <p><strong>Objetivo General:</strong> ${curso.objetivogeneral}</p>
       `;
     }
-    function cerrarSesion() {
-          // Elimina el valor de "registroId" del almacenamiento local
-          localStorage.removeItem("registroId");
 
-          // Puedes redirigir al usuario a una página de inicio de sesión o realizar otras acciones de cierre de sesión si es necesario
-          window.location.href = "login.html";
-      }
+    function cerrarSesion() {
+      // Elimina el valor de "registroId" del almacenamiento local
+      localStorage.removeItem("registroId");
+
+      // Puedes redirigir al usuario a una página de inicio de sesión o realizar otras acciones de cierre de sesión si es necesario
+      window.location.href = "login.html";
+    }
   </script>
+
   <!-- Botón para abrir el perfil en una ventana flotante -->
   <button id="perfilButton">Ver perfil</button>
 
-   <script>
-     // Obtener el ID del registro desde la URL
-     var urlParams = new URLSearchParams(window.location.search);
-     var registroId = urlParams.get("id");
+  <script>
+    // Obtener el ID del registro desde la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var registroId = urlParams.get("id");
 
-     // Generar la URL de profile.html con el ID del registro
-     var profileUrl = "profile.html";
-
-   var perfilButton = document.getElementById("perfilButton");
-perfilButton.addEventListener("click", function() {
-  // Verificar que registroId tenga un valor antes de abrir la ventana emergente
-  if (registroId) {
     // Generar la URL de profile.html con el ID del registro
-    var profileUrl = "profile.html?id=" + registroId;
-    // Abrir "profile.html" en una ventana flotante
-    window.open(profileUrl, "Perfil", "width=600,height=400");
-  } else {
-    console.error("ID de registro no válido");
-  }
-});
+    var profileUrl = "profile.html";
 
-   </script>
+    // Obtener el botón de perfil y agregar el evento click
+    var perfilButton = document.getElementById("perfilButton");
+    perfilButton.addEventListener("click", function() {
+      // Verificar que registroId tenga un valor antes de abrir la ventana emergente
+      if (registroId) {
+        // Generar la URL de profile.html con el ID del registro
+        var profileUrl = "profile.html?id=" + registroId;
+        // Abrir "profile.html" en una ventana flotante
+        window.open(profileUrl, "Perfil", "width=600,height=400");
+      } else {
+        console.error("ID de registro no válido");
+      }
+    });
+  </script>
 
 </body>
-</html>
 
+</html>
