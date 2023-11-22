@@ -1,45 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil</title>
   <style>
+    /* Estilos básicos */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    #perfilContainer {
-      max-width: 400px;
-      margin: 0 auto;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    li strong {
-      display: inline-block;
-      width: 100px;
     }
   </style>
 </head>
@@ -50,8 +17,9 @@
   <div id="perfilContainer"></div>
 
   <script>
-    // Obtener el ID del registro desde el almacenamiento local
-    var registroId = localStorage.getItem("registroId");
+    // Obtener el ID del registro desde la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var registroId = urlParams.get("id");
 
     if (registroId) {
       // Obtener los datos del registro desde la API
@@ -76,7 +44,7 @@
           console.error(error);
         });
     } else {
-      // Si no se encuentra el ID del registro en el almacenamiento local, redirigir a login.html
+      // Si no se encuentra el ID del registro en la URL, redirigir a login.html u otra página
       window.location.href = "login.html";
     }
 
@@ -86,15 +54,13 @@
       var ul = document.createElement("ul");
       for (var key in perfil) {
         var li = document.createElement("li");
-        var strong = document.createElement("strong");
-        strong.textContent = key + ":";
-        li.appendChild(strong);
-        li.innerHTML += " " + perfil[key];
+        li.textContent = key + ": " + perfil[key];
         ul.appendChild(li);
       }
 
       perfilContainer.appendChild(ul);
     }
+
   </script>
 </body>
 
